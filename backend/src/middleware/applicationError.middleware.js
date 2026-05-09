@@ -1,6 +1,7 @@
 export default class ApplicationError extends Error{
-    constructor(code,message){
+    constructor(statusCode,message){
         super(message);
-        this.code = code;
+        this.statusCode =statusCode;
+        Error.captureStackTrace(this,this.constructor)
     }
 }
