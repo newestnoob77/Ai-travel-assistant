@@ -1,38 +1,344 @@
-.App {
+body {
+  background: linear-gradient(135deg, #0a0a0a, #141414, #0f1a24);
+  color: #e6e6e6;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Dark Container */
+.travel-container {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #111; /* deep charcoal */
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  animation: fadeIn 0.4s ease;
+  color: #e6e6e6; /* soft white */
+}
+
+/* Title */
+.title {
   text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Error */
+.error {
+  color: #ff6b6b;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Form */
+.travel-form {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+}
+
+/* Input Group */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #cfcfcf;
+}
+
+.input-group input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #f2f2f2;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+.input-group input::placeholder {
+  color: #777;
+}
+
+.input-group input:focus {
+  border-color: #4facfe;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.25);
+  outline: none;
+}
+
+/* Two Column Layout */
+.two-col {
+  display: flex;
+  gap: 15px;
+}
+
+/* Interests Section */
+.interests-section label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #cfcfcf;
+}
+
+.interests-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.interest-chip {
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: #1f1f1f;
+  border: 1px solid #333;
+  cursor: pointer;
+  font-size: 14px;
+  color: #dcdcdc;
+  transition: 0.25s ease;
+}
+
+.interest-chip:hover {
+  background: #2a2a2a;
+}
+
+.interest-chip.active {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #000;
+  border: none;
+  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+}
+
+/* Submit Button */
+.submit-btn {
+  padding: 14px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(79, 172, 254, 0.4);
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container */
+.itinerary-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #111;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  color: #e6e6e6;
+  animation: fadeIn 0.4s ease;
+}
+
+.itinerary-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.itinerary-box {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 14px;
+  line-height: 1.6;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+  margin-bottom: 25px;
+}
+
+.day-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #4facfe;
+}
+
+.highlight {
+  font-weight: 600;
+  color: #00f2fe;
+  margin: 10px 0;
+}
+
+.itinerary-text {
+  margin: 6px 0;
+  color: #dcdcdc;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(79, 172, 254, 0.4);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  color: #e6e6e6;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Title */
+.dashboard-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Grid Layout */
+.leads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Lead Card */
+.lead-card {
+  background: #111;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  transition: 0.25s ease;
+}
+
+.lead-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(79, 172, 254, 0.25);
+  border-color: #4facfe;
+}
+
+/* Lead Name */
+.lead-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #4facfe;
+}
+
+/* Lead Email */
+.lead-email {
+  font-size: 14px;
+  color: #bfbfbf;
+  margin-bottom: 6px;
+}
+
+/* Lead Destination */
+.lead-destination {
+  font-size: 16px;
+  font-weight: 500;
+  color: #00f2fe;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* NAVBAR CONTAINER */
+.nav-bar {
+  width: 100%;
+  padding: 10px ;
+  background: #0d0d0d;
+  border-bottom: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.App-link {
-  color: #61dafb;
+/* LOGO */
+.nav-logo {
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* LINKS CONTAINER */
+.nav-links {
+  display: flex;
+  margin-right:20px;
+  gap: 25px;
+}
+
+/* INDIVIDUAL LINK */
+.nav-link {
+  color: #dcdcdc;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: 0.25s ease;
+}
+
+/* HOVER EFFECT */
+.nav-link:hover {
+  background: #1a1a1a;
+  color: #00f2fe;
+  box-shadow: 0 0 10px rgba(0,242,254,0.3);
+}
+
+/* ACTIVE LINK (optional if using NavLink) */
+.nav-link.active {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #000;
+  font-weight: 600;
 }
