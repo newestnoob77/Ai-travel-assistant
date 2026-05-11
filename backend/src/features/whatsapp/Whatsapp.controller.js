@@ -160,12 +160,12 @@ export default class WhatsappController {
           "Thank you for using AI Travel Assistant! Have an amazing trip! ✈️🌟\n\nType anything to plan another trip!"
         );
 
-        this.whatsappSession.clearSession(userPhone);
+        this.whatsappSession.deleteSession(userPhone);
         return;
       }
     } catch (err) {
       console.error("WhatsApp handler error:", err);
-      this.whatsappSession.clearSession(userPhone);
+      this.whatsappSession.deleteSession(userPhone);
       await this.sendMessage(
         userPhone,
         "Sorry, something went wrong generating your itinerary. Please type anything to try again!"
