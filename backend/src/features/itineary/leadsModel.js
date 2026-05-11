@@ -10,6 +10,11 @@ const LeadSchema = new mongoose.Schema({
     unique: true,
     lowercase: true
   },
+  whatsapp: {
+    type: String,
+    required: [true, "WhatsApp number is required"],
+    unique: true,
+  },
   destination: {
     type: String,
     required: [true, 'Destination is required']
