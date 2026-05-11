@@ -2,7 +2,7 @@ import twilio from "twilio";
 import WhatsappSession from "./session.store.js";
 import { buildTravelPrompt } from "../utils/promptBuilder.js";
 import { generateTravelItinerary } from "../ai-services/ai.service.js";
-import { leadsModel } from "../itinerary/leadsModel.js";
+import { leadsModel } from "../itineary/leadsModel.js";
 
 export default class WhatsappController {
   constructor() {
