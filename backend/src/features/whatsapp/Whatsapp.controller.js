@@ -132,10 +132,11 @@ export default class WhatsappController {
           interest,
         });
 
+         
+
         const itinerary = await generateTravelItinerary(prompt);
 
-        
-        await new leadsModel({
+         await new leadsModel({
           name: session.name,
           email: session.email, // collected from user
           whatsapp: userPhone.replace("whatsapp:+", ""), // clean number
@@ -146,6 +147,8 @@ export default class WhatsappController {
           generatedItinerary: itinerary,
           status: "completed",
         }).save();
+
+     
 
         // Split long itinerary into chunks
         const maxLength = 1500;
