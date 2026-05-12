@@ -32,11 +32,13 @@ export default class WhatsappController {
 
   async handleWhatsAppMessage(req, res, next) {
     const userMessage = req.body.Body?.trim();
-    const userPhone = req.body.From; // Twilio format: "whatsapp:+919876543210"
-    res.status(200).send("OK");
-
+    res.status(200).send("OK"); 
+    if (!userMessage) return;
+    const userPhone = req.body.From;// Twilio format: "whatsapp:+919876543210"
+    
+    const session = this.whatsappSession.getSession(userPhone);
     try {
-      const session = this.whatsappSession.getSession(userPhone);
+      
 
       if (session.step === 0) {
         this.whatsappSession.updateSession(userPhone, { step: 1 });
@@ -66,8 +68,8 @@ export default class WhatsappController {
       }
 
       if (session.step === 3) {
-        const days = parseInt(userMessage);
-        if (isNaN(days) || days < 1 || days > 30) {
+        const days = Number(userMessage);
+        if (!Number.isInteger(days) || days < 1 || days > 30) {
           await this.sendMessage(userPhone, "Please enter a valid number of days between 1 and 30.");
           return;
         }
@@ -91,7 +93,7 @@ export default class WhatsappController {
       }
 
       if (session.step === 5) {
-        const budget = parseFloat(userMessage);
+        const budget = Number(userMessage);
         if (isNaN(budget) || budget <= 0) {
           await this.sendMessage(userPhone, "Please enter a valid budget amount in USD (e.g. 2000)");
           return;
@@ -107,7 +109,7 @@ export default class WhatsappController {
       if (session.step === 6) {
         const numbers = userMessage.split(",").map((n) => n.trim());
         const interest = numbers.filter((n) => this.interestMap[n]).map((n) => this.interestMap[n]);
-
+        
         if (interest.length === 0) {
           await this.sendMessage(
             userPhone,
@@ -115,6 +117,7 @@ export default class WhatsappController {
           );
           return;
         }
+        this.whatsappSession.updateSession(userPhone,{interest})
 
         await this.sendMessage(
           userPhone,
@@ -169,6 +172,17 @@ export default class WhatsappController {
       }
     } catch (err) {
       console.error("WhatsApp handler error:", err);
+      await new leadsModel({
+          name: session.name,
+          email: session.email, // collected from user
+          whatsapp: userPhone.replace("whatsapp:+", ""), // clean number
+          destination: session.destination,
+          numberOfDays: session.numberOfDays,
+          budget: session.budget,
+          interest:session.interest,
+          generatedItinerary: "failed to generate itinerary",
+          status: "failed",
+        }).save();
       this.whatsappSession.deleteSession(userPhone);
       await this.sendMessage(
         userPhone,
